@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Points Table — Prof. A. Thurairajah Memorial Cricket Tournament 2K26</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --bg-space: #0b0f19;
+  --bg-space-secondary: #0f172a;
+  --bg-space-tertiary: #1e293b;
+  --bg-card: rgba(15, 23, 42, 0.75);
+  --bg-card-solid: #0f172a;
+  --bg-card-hover: rgba(30, 41, 59, 0.88);
+  --bg-card-border: rgba(148, 163, 184, 0.12);
+  --bg-card-border-hover: rgba(59, 130, 246, 0.4);
+
+  --text-main: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-subtle: #64748b;
+
+  --accent-primary: #3b82f6;
+  --accent-primary-hover: #60a5fa;
+  --accent-primary-subtle: rgba(59, 130, 246, 0.14);
+  --accent-cyan: #38bdf8;
+  --accent-emerald: #10b981;
+  --accent-rose: #ef4444;
+
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  --hero-glow-1: rgba(37, 99, 235, 0.16);
+  --hero-glow-2: rgba(59, 130, 246, 0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: #060a12;
+  color: var(--text-main);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  padding: 28px;
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-space); }
+::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.3); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
+
+/* ─── Toolbar (not exported) ─── */
+.toolbar {
+  display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;
+  margin: 0 auto 22px; max-width: 1120px;
+}
+.toolbar .hint { color: var(--text-muted); font-size: 13px; margin-right: auto; }
+.btn {
+  font-family: var(--font-display); font-weight: 600; font-size: 14px; letter-spacing: .5px;
+  color: #fff; background: linear-gradient(135deg, #2563eb, #3b82f6);
+  border: 1px solid rgba(96, 165, 250, .5); border-radius: 10px;
+  padding: 10px 20px; cursor: pointer;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, .3);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(37, 99, 235, .45); }
+.btn.secondary { background: rgba(30, 41, 59, .85); border-color: var(--bg-card-border); box-shadow: none; color: var(--text-secondary); }
+.btn.secondary:hover { border-color: var(--accent-primary); color: #fff; }
+
+/* ─── Poster ─── */
+.poster {
+  width: 1080px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  background-color: var(--bg-space);
+  background-image:
+    radial-gradient(circle at 88% 4%, var(--hero-glow-1) 0%, transparent 52%),
+    radial-gradient(circle at 6% 96%, var(--hero-glow-2) 0%, transparent 48%),
+    radial-gradient(circle at 88% 12%, rgba(56, 189, 248, 0.08) 0%, transparent 55%),
+    url("data:image/svg+xml,%3Csvg width='52' height='52' viewBox='0 0 52 52' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2338bdf8' fill-opacity='0.028' fill-rule='evenodd'%3E%3Cpath d='M26 0L0 26l26 26 26-26L26 0zm0 6.83L45.17 26 26 45.17 6.83 26 26 6.83z'/%3E%3Ccircle cx='26' cy='26' r='4'/%3E%3C/g%3E%3C/svg%3E");
+  border: 1px solid var(--bg-card-border);
+  box-shadow: var(--card-shadow);
+}
+
+/* ─── Header strip ─── */
+.header {
+  display: flex; align-items: center; gap: 22px;
+  background: #f8fafc;
+  border-left: 10px solid var(--accent-primary);
+  border-bottom: 4px solid var(--accent-primary);
+  padding: 26px 38px;
+}
+.header-text { flex: 1; min-width: 0; }
+.header-title {
+  font-family: var(--font-display); font-weight: 900; font-size: 40px;
+  letter-spacing: 3px; color: #0f172a; line-height: 1;
+}
+.header-sub {
+  margin-top: 8px; font-family: var(--font-display); font-weight: 600;
+  font-size: 15px; letter-spacing: 1.4px; color: #334155;
+  text-transform: uppercase;
+}
+.header-badges { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.header-badge {
+  font-family: var(--font-display); font-weight: 800; font-size: 15px;
+  letter-spacing: 2px; color: #fff;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  border-radius: 8px; padding: 7px 14px;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, .35);
+}
+.header-badge.alt {
+  background: transparent; color: #2563eb;
+  border: 1px solid rgba(37, 99, 235, .45);
+  box-shadow: none; font-weight: 700; font-size: 12px; letter-spacing: 1.5px;
+}
+
+/* ─── Body layout ─── */
+.body-row { display: flex; gap: 24px; padding: 28px 32px 0; align-items: stretch; }
+
+/* ─── Table card ─── */
+.table-card {
+  flex: 1; min-width: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--bg-card-border-hover);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow), 0 0 40px rgba(59, 130, 246, .12);
+  overflow: hidden;
+  position: relative;
+}
+.table-card::after { /* cricket-ball watermark */
+  content: '';
+  position: absolute; right: -18px; bottom: -18px; width: 130px; height: 130px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2338bdf8' fill-opacity='0.045'%3E%3Cpath d='M19.07 4.93a10 10 0 0 0-14.14 0 10 10 0 0 0 0 14.14 10 10 0 0 0 14.14 0 10 10 0 0 0 0-14.14zm-4.32 12.02l-1.42 1.42a8.006 8.006 0 0 1-5.65-2.35 8.006 8.006 0 0 1-2.35-5.65l1.42-1.42a6.005 6.005 0 0 0 8 8zm4.32-4.32a8.006 8.006 0 0 1-2.35 5.65l-1.42-1.42a6.005 6.005 0 0 0-8-8l1.42-1.42a8.006 8.006 0 0 1 5.65-2.35 8.006 8.006 0 0 1 4.7 9.54z'/%3E%3C/svg%3E");
+  background-size: contain; background-repeat: no-repeat; pointer-events: none;
+}
+
+table { width: 100%; border-collapse: collapse; position: relative; z-index: 1; }
+
+thead th {
+  font-family: var(--font-display); font-weight: 700; font-size: 14px;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--accent-cyan);
+  padding: 18px 10px 14px;
+  border-bottom: 2px solid var(--accent-primary);
+  background: rgba(11, 15, 25, 0.6);
+  text-align: center;
+}
+thead th.team-col { text-align: left; padding-left: 18px; }
+thead th.pts-col, thead th.nrr-col { font-size: 15px; }
+
+tbody tr { position: relative; }
+tbody td {
+  font-family: var(--font-body); font-size: 17px; font-weight: 500;
+  color: var(--text-secondary);
+  padding: 15px 10px;
+  text-align: center;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.10);
+}
+tbody tr:last-child td { border-bottom: none; }
+
+/* Qualifier rows (top N) get a subtle blue wash + cyan left bar */
+tbody tr.qualifier { background: var(--accent-primary-subtle); box-shadow: inset 5px 0 0 var(--accent-cyan); }
+tbody tr:last { background: transparent; }
+
+.rank-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 9px;
+  font-family: var(--font-display); font-weight: 800; font-size: 17px;
+  color: #fff; background: rgba(30, 41, 59, .9);
+  border: 1px solid var(--bg-card-border);
+}
+tr.qualifier .rank-badge {
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  border-color: rgba(96, 165, 250, .6);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, .4);
+}
+
+td.team-cell { text-align: left; padding-left: 18px; }
+.team-info { display: flex; align-items: center; gap: 14px; }
+
+/* Circular crop for the (non-transparent) batch logos */
+.team-logo {
+  width: 52px; height: 52px; border-radius: 50%;
+  overflow: hidden; flex-shrink: 0;
+  border: 2px solid rgba(59, 130, 246, .55);
+  box-shadow: 0 0 14px rgba(56, 189, 248, .25);
+  background: var(--bg-space-tertiary);
+}
+.team-logo img {
+  width: 100%; height: 100%; object-fit: cover;
+  transform: scale(var(--zoom, 1.12));
+  display: block;
+}
+.team-code {
+  font-family: var(--font-display); font-weight: 800; font-size: 22px;
+  letter-spacing: 1.5px; color: var(--text-main);
+}
+.team-postfix { display: block; font-family: var(--font-body); font-weight: 500; font-size: 11px; letter-spacing: 1.5px; color: var(--text-subtle); text-transform: uppercase; margin-top: 2px; }
+
+td.stat { font-variant-numeric: tabular-nums; }
+td.pts {
+  font-family: var(--font-display); font-weight: 800; font-size: 24px;
+  color: var(--accent-cyan);
+  text-shadow: 0 0 12px rgba(56, 189, 248, .35);
+}
+td.nrr { font-family: var(--font-display); font-weight: 700; font-size: 18px; color: var(--text-main); font-variant-numeric: tabular-nums; }
+td.nrr.neg { color: var(--accent-rose); }
+td.nrr.pos { color: var(--accent-emerald); }
+
+/* ─── Brand / side panel ─── */
+.brand-panel {
+  width: 300px; flex-shrink: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--bg-card-border-hover);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow), 0 0 40px rgba(59, 130, 246, .12);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 30px 24px;
+  position: relative; overflow: hidden;
+}
+.brand-panel::before { /* dark scrim behind transparent logo */
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 50% 30%, rgba(11, 15, 25, 0.72) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, rgba(56, 189, 248, 0.10) 0%, transparent 55%);
+  pointer-events: none;
+}
+.brand-logo {
+  width: 220px; position: center; z-index: 1;
+  filter: drop-shadow(0 10px 14px rgba(0,0,0,.5)) drop-shadow(0 0 26px rgba(56,189,248,.30));
+}
+.brand-year {
+  position: relative; z-index: 1; margin-top: 1px;
+  font-family: var(--font-display); font-weight: 800; font-size: 20px;
+  line-height: 1; letter-spacing: 6px; padding-left: 6px; color: #f8fafc;
+  text-shadow: 0 2px 6px rgba(0,0,0,.55), 0 0 18px rgba(56,189,248,.35);
+}
+.brand-sub {
+  position: relative; z-index: 1; margin-top: 1px;
+  font-family: var(--font-display); font-weight: 600; font-size: 12.5px;
+  letter-spacing: 2.5px; color: var(--accent-cyan); text-align: center;
+}
+
+/* ─── Footer bar ─── */
+.footer-bar {
+  margin: 24px 32px 32px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  background: var(--accent-primary-subtle);
+  border: 1px solid var(--bg-card-border-hover);
+  border-radius: 12px;
+  padding: 16px 22px;
+}
+.footer-note {
+  font-family: var(--font-display); font-weight: 700; font-size: 16px;
+  letter-spacing: 1.5px; color: var(--accent-cyan);
+}
+.footer-updated {
+  font-family: var(--font-body); font-weight: 500; font-size: 13px;
+  letter-spacing: 1px; color: var(--text-muted); white-space: nowrap;
+}
+
+/* ─── Print ─── */
+@media print {
+  .toolbar { display: none !important; }
+  body { padding: 0; background: #fff; }
+  .poster { margin: 0; border-radius: 0; }
+}
+@page { size: 1080px auto; margin: 0; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <span class="hint">Edit the <b>CONFIG</b> object at the top of the script to update standings.</span>
+  <button class="btn" id="btnPng">Download PNG</button>
+  <button class="btn secondary" onclick="window.print()">Save as PDF</button>
+</div>
+
+<div class="poster" id="poster">
+  <header class="header">
+    <div class="header-text">
+      <div class="header-title">POINTS TABLE</div>
+      <div class="header-sub" id="tournamentName"></div>
+    </div>
+    <div class="header-badges">
+      <div class="header-badge" id="stageBadge"></div>
+      <div class="header-badge alt" id="formatBadge"></div>
+    </div>
+  </header>
+
+  <div class="body-row">
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th class="rank-col">#</th>
+            <th class="team-col">Team</th>
+            <th>P</th><th>W</th><th>L</th><th>NR</th>
+            <th class="pts-col">Pts</th>
+            <th class="nrr-col">NRR</th>
+          </tr>
+        </thead>
+        <tbody id="standings"></tbody>
+      </table>
+    </div>
+
+    <aside class="brand-panel">
+      <img class="brand-logo" id="brandLogo" alt="Tournament logo">
+      <div class="brand-year" id="brandYear"></div>
+      <div class="brand-sub" id="brandOrganizer"></div>
+    </aside>
+  </div>
+
+  <div class="footer-bar">
+    <div class="footer-note" id="footerNote"></div>
+    <div class="footer-updated" id="footerUpdated"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+/* ================================================================
+   EDIT THE STANDINGS HERE — everything below renders automatically.
+   nrr: net run rate as a number (e.g. +2.169 → 2.169, -0.118 → -0.118)
+   Points are computed as won*2 + nr*1. Rows sort by Pts, then NRR.
+   ================================================================ */
+const CONFIG = {
+  tournamentName: 'Prof. A. Thurairajah Memorial Cricket Tournament 2K26',
+  stage: 'League Stage',
+  format: 'T20',
+  qualifierCount: 2,                       // top N rows are highlighted
+  footerNote: 'Top 2 teams qualify for the Final',
+  updatedLabel: 'Updated after Match 4',
+  tournament: {
+    logo: 'images/tournamentLogo.png',
+    year: '2K26',
+    organizer: 'Organized by E22'
+  },
+  teams: [
+    { code: 'E24', label: 'Batch of 2024', logo: 'images/E24.jpg', played: 2, won: 2, lost: 0, nr: 0, nrr: 2.169 },
+    { code: 'E23', label: 'Batch of 2023', logo: 'images/E23.jpg', played: 2, won: 1, lost: 1, nr: 0, nrr: 1.219 },
+    { code: 'E22', label: 'Batch of 2022', logo: 'images/E22.png', played: 2, won: 1, lost: 1, nr: 0, nrr: -0.118 },
+    { code: 'E25', label: 'Batch of 2025', logo: 'images/E25.jpg', played: 2, won: 0, lost: 2, nr: 0, nrr: -3.481 }
+  ]
+};
+
+/* Optional: fine-tune circular crop per logo (raise if a badge looks small) */
+const ZOOM = { E22: 1.12, E23: 1.12, E24: 1.12, E25: 1.12 };
+/* ================================================================ */
+
+const $ = id => document.getElementById(id);
+
+function render() {
+  $('tournamentName').textContent = CONFIG.tournamentName;
+  $('stageBadge').textContent = CONFIG.stage;
+  $('formatBadge').textContent = CONFIG.format;
+  $('footerNote').textContent = CONFIG.footerNote || '';
+  $('footerUpdated').textContent = CONFIG.updatedLabel || '';
+  $('brandLogo').src = CONFIG.tournament.logo;
+  $('brandYear').textContent = CONFIG.tournament.year;
+  $('brandOrganizer').textContent = CONFIG.tournament.organizer;
+
+  const rows = CONFIG.teams
+    .map(t => ({ ...t, pts: t.won * 2 + t.nr * 1 }))
+    .sort((a, b) => b.pts - a.pts || b.nrr - a.nrr);
+
+  $('standings').innerHTML = rows.map((t, i) => {
+    const rank = i + 1;
+    const isQualifier = rank <= CONFIG.qualifierCount;
+    const nrrText = (t.nrr > 0 ? '+' : '') + t.nrr.toFixed(3);
+    const nrrClass = t.nrr > 0 ? 'pos' : (t.nrr < 0 ? 'neg' : '');
+    return `
+      <tr class="${isQualifier ? 'qualifier' : 'last'}">
+        <td><span class="rank-badge">${rank}</span></td>
+        <td class="team-cell">
+          <div class="team-info">
+            <div class="team-logo"><img src="${t.logo}" alt="${t.code}" style="--zoom:${ZOOM[t.code] || 1.12}"></div>
+            <div>
+              <span class="team-code">${t.code}</span>
+              <span class="team-postfix">${t.label || ''}</span>
+            </div>
+          </div>
+        </td>
+        <td class="stat">${t.played}</td>
+        <td class="stat">${t.won}</td>
+        <td class="stat">${t.lost}</td>
+        <td class="stat">${t.nr}</td>
+        <td class="pts">${t.pts}</td>
+        <td class="nrr ${nrrClass}">${nrrText}</td>
+      </tr>`;
+  }).join('');
+}
+
+render();
+
+$('btnPng').addEventListener('click', async () => {
+  const poster = $('poster');
+  const canvas = await html2canvas(poster, { scale: 2, backgroundColor: null, useCORS: true });
+  const a = document.createElement('a');
+  a.download = 'points-table.png';
+  a.href = canvas.toDataURL('image/png');
+  a.click();
+});
+</script>
+</body>
+</html>
