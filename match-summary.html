@@ -73,6 +73,12 @@
   .brand-logo { width: 300px; max-height: 300px; object-fit: contain;
     filter: drop-shadow(0 2px 0 rgba(148,163,184,.55)) drop-shadow(0 6px 0 rgba(30,41,59,.9))
             drop-shadow(0 14px 14px rgba(0,0,0,.65)) drop-shadow(0 0 22px rgba(56,189,248,.45)); }
+  .brand-year { margin-top: 10px; font-family: var(--font-display); font-weight: 900; font-size: 72px;
+    line-height: 1; letter-spacing: 6px; padding-left: 6px; color: #f8fafc;
+    text-shadow: 0 1px 0 #cbd5e1, 0 2px 0 #94a3b8, 0 3px 0 #64748b, 0 4px 0 #475569, 0 5px 0 #334155,
+                 0 9px 12px rgba(0,0,0,.6), 0 0 26px rgba(56,189,248,.5); }
+  .brand-sub { margin-top: 14px; font-family: var(--font-display); font-weight: 600; font-size: 17px;
+    letter-spacing: 4px; color: var(--accent-cyan); }
 
   .content { position: relative; width: 940px; display: flex; flex-direction: column; gap: 20px; }
 
@@ -188,6 +194,8 @@
 
     <div class="brand">
       <img class="brand-logo" id="brandLogo" alt="Tournament logo">
+      <div class="brand-year" id="brandYear"></div>
+      <div class="brand-sub" id="brandSub"></div>
     </div>
   </div>
 
@@ -211,7 +219,9 @@
 /* ============ MATCH DATA (edit / paste new match objects here) ============ */
 const TOURNAMENT = {
   name: "Prof. A. Thurairajah Memorial Cricket Tournament 2K26",
-  logo: "images/tournamentLogo.png"      // transparent PNG
+  logo: "images/tournamentLogo.png",     // transparent PNG
+  year: "2K26",                          // shown under the logo
+  organizer: "ORGANIZED BY E22"          // subtitle under the year
 };
 
 const LOGOS = {
@@ -375,6 +385,8 @@ function render(){
   document.getElementById("tName").textContent = TOURNAMENT.name;
   document.getElementById("matchNo").textContent = m.matchNo;
   document.getElementById("brandLogo").src = TOURNAMENT.logo;
+  document.getElementById("brandYear").textContent = TOURNAMENT.year;
+  document.getElementById("brandSub").textContent = TOURNAMENT.organizer;
   document.getElementById("card1").innerHTML = inningsCard(m.innings[0]);
   document.getElementById("card2").innerHTML = inningsCard(m.innings[1]);
   document.getElementById("result").innerHTML = "RESULT: <em>" + esc(m.result) + "</em>";
