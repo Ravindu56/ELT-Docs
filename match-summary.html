@@ -60,7 +60,7 @@
     background: radial-gradient(ellipse at 30% 0%, var(--hero-glow-1), transparent 55%),
                 radial-gradient(ellipse at 90% 100%, var(--hero-glow-2), transparent 55%); }
 
-  /* ===== Stadium + tournament brand panel ===== */
+  /* ===== Stadium + tournament logo panel ===== */
   .stadium { position: absolute; top: 0; right: 0; width: 400px; height: 100%; overflow: hidden;
     background: var(--bg-space-secondary); border-left: 1px solid var(--bg-card-border); }
   .stadium svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
@@ -70,15 +70,9 @@
     display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 26px 0 44px; }
   .brand::before { content: ""; position: absolute; inset: -40px 0; z-index: -1;
     background: radial-gradient(ellipse at 55% 50%, rgba(11,15,25,.92) 0%, rgba(11,15,25,.75) 45%, transparent 72%); }
-  .brand-logo { width: 270px; max-height: 270px; object-fit: contain;
+  .brand-logo { width: 300px; max-height: 300px; object-fit: contain;
     filter: drop-shadow(0 2px 0 rgba(148,163,184,.55)) drop-shadow(0 6px 0 rgba(30,41,59,.9))
             drop-shadow(0 14px 14px rgba(0,0,0,.65)) drop-shadow(0 0 22px rgba(56,189,248,.45)); }
-  .brand-title { margin-top: 18px; font-family: var(--font-display); font-weight: 900; font-size: 34px;
-    line-height: 1.05; letter-spacing: 1.5px; color: #f8fafc;
-    text-shadow: 0 1px 0 #cbd5e1, 0 2px 0 #94a3b8, 0 3px 0 #64748b, 0 4px 0 #475569, 0 5px 0 #334155,
-                 0 8px 12px rgba(0,0,0,.6), 0 0 26px rgba(56,189,248,.5); }
-  .brand-sub { margin-top: 14px; font-family: var(--font-display); font-weight: 600; font-size: 16px;
-    letter-spacing: 4px; color: var(--accent-cyan); }
 
   .content { position: relative; width: 940px; display: flex; flex-direction: column; gap: 20px; }
 
@@ -194,8 +188,6 @@
 
     <div class="brand">
       <img class="brand-logo" id="brandLogo" alt="Tournament logo">
-      <div class="brand-title" id="brandTitle">E-LEGENDS<br>TROPHY 2K26</div>
-      <div class="brand-sub">CRICKET</div>
     </div>
   </div>
 
@@ -219,7 +211,6 @@
 /* ============ MATCH DATA (edit / paste new match objects here) ============ */
 const TOURNAMENT = {
   name: "Prof. A. Thurairajah Memorial Cricket Tournament 2K26",
-  brandTitle: "E-LEGENDS<br>TROPHY 2K26",
   logo: "images/tournamentLogo.png"      // transparent PNG
 };
 
@@ -384,7 +375,6 @@ function render(){
   document.getElementById("tName").textContent = TOURNAMENT.name;
   document.getElementById("matchNo").textContent = m.matchNo;
   document.getElementById("brandLogo").src = TOURNAMENT.logo;
-  document.getElementById("brandTitle").innerHTML = TOURNAMENT.brandTitle;
   document.getElementById("card1").innerHTML = inningsCard(m.innings[0]);
   document.getElementById("card2").innerHTML = inningsCard(m.innings[1]);
   document.getElementById("result").innerHTML = "RESULT: <em>" + esc(m.result) + "</em>";
