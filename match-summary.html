@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Match Summary - Prof. A. Thurairajah Memorial Cricket Tournament 2K26</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --bg-space: #0b0f19;
+    --bg-space-secondary: #0f172a;
+    --bg-space-tertiary: #1e293b;
+    --bg-card: rgba(15, 23, 42, 0.75);
+    --bg-card-solid: #0f172a;
+    --bg-card-border: rgba(148, 163, 184, 0.12);
+    --bg-card-border-hover: rgba(59, 130, 246, 0.4);
+    --text-main: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --text-subtle: #64748b;
+    --accent-primary: #3b82f6;
+    --accent-primary-hover: #60a5fa;
+    --accent-primary-subtle: rgba(59, 130, 246, 0.14);
+    --accent-cyan: #38bdf8;
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    --card-hover-shadow: 0 15px 35px rgba(37, 99, 235, 0.2);
+    --hero-glow-1: rgba(37, 99, 235, 0.16);
+    --hero-glow-2: rgba(59, 130, 246, 0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background-color: var(--bg-space); color: var(--text-main);
+    font-family: var(--font-body); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  h1, h2, h3, h4 { font-family: var(--font-display); color: inherit; }
+  body { display: flex; flex-direction: column; align-items: center; padding: 16px; gap: 12px;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact; min-height: 100vh; }
+
+  .toolbar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; align-items: center; }
+  .toolbar button, .toolbar select {
+    font-family: var(--font-body); font-weight: 600; font-size: 14px; cursor: pointer; color: #fff;
+    border-radius: 8px; padding: 8px 16px; border: 1px solid var(--bg-card-border);
+    background: var(--accent-primary); transition: background .2s ease, box-shadow .2s ease; }
+  .toolbar button:hover { background: var(--accent-primary-hover); box-shadow: var(--card-hover-shadow); }
+  .toolbar select { background: var(--bg-card-solid); border-color: var(--bg-card-border-hover); }
+
+  .wrap { position: relative; }
+  .stage { width: 1376px; transform-origin: 0 0; }
+
+  /* ===== Poster ===== */
+  .poster { position: relative; width: 1376px; min-height: 768px; overflow: hidden;
+    padding: 35px 0 34px 30px; background-color: var(--bg-space);
+    background-image:
+      radial-gradient(circle at 88% 12%, rgba(56,189,248,.08) 0%, transparent 55%),
+      radial-gradient(circle at 12% 88%, rgba(37,99,235,.06) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg width='52' height='52' viewBox='0 0 52 52' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2338bdf8' fill-opacity='0.028' fill-rule='evenodd'%3E%3Cpath d='M26 0L0 26l26 26 26-26L26 0zm0 6.83L45.17 26 26 45.17 6.83 26 26 6.83z'/%3E%3Ccircle cx='26' cy='26' r='4'/%3E%3C/g%3E%3C/svg%3E"); }
+  .glow { position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse at 30% 0%, var(--hero-glow-1), transparent 55%),
+                radial-gradient(ellipse at 90% 100%, var(--hero-glow-2), transparent 55%); }
+
+  /* ===== Stadium + tournament brand panel ===== */
+  .stadium { position: absolute; top: 0; right: 0; width: 400px; height: 100%; overflow: hidden;
+    background: var(--bg-space-secondary); border-left: 1px solid var(--bg-card-border); }
+  .stadium svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .stadium::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(90deg, var(--bg-space) 0%, transparent 35%); }
+  .brand { position: absolute; z-index: 2; left: 0; right: 0; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 26px 0 44px; }
+  .brand::before { content: ""; position: absolute; inset: -40px 0; z-index: -1;
+    background: radial-gradient(ellipse at 55% 50%, rgba(11,15,25,.92) 0%, rgba(11,15,25,.75) 45%, transparent 72%); }
+  .brand-logo { width: 270px; max-height: 270px; object-fit: contain;
+    filter: drop-shadow(0 2px 0 rgba(148,163,184,.55)) drop-shadow(0 6px 0 rgba(30,41,59,.9))
+            drop-shadow(0 14px 14px rgba(0,0,0,.65)) drop-shadow(0 0 22px rgba(56,189,248,.45)); }
+  .brand-title { margin-top: 18px; font-family: var(--font-display); font-weight: 900; font-size: 34px;
+    line-height: 1.05; letter-spacing: 1.5px; color: #f8fafc;
+    text-shadow: 0 1px 0 #cbd5e1, 0 2px 0 #94a3b8, 0 3px 0 #64748b, 0 4px 0 #475569, 0 5px 0 #334155,
+                 0 8px 12px rgba(0,0,0,.6), 0 0 26px rgba(56,189,248,.5); }
+  .brand-sub { margin-top: 14px; font-family: var(--font-display); font-weight: 600; font-size: 16px;
+    letter-spacing: 4px; color: var(--accent-cyan); }
+
+  .content { position: relative; width: 940px; display: flex; flex-direction: column; gap: 20px; }
+
+  /* ===== Header (text only) ===== */
+  .header { min-height: 132px; display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    padding: 0 26px 0 28px; background: #f8fafc; border-left: 8px solid var(--accent-primary);
+    border-radius: 4px; box-shadow: var(--card-shadow); color: #0f172a; }
+  .titles h1 { font-size: 58px; font-weight: 900; letter-spacing: .5px; line-height: 1; }
+  .titles h2 { font-size: 27px; font-weight: 700; color: #1e293b; margin-top: 8px; line-height: 1.15; }
+  .match-badge { flex-shrink: 0; text-align: center; padding: 10px 26px; border-radius: 10px;
+    background: var(--bg-card-solid); border: 2px solid var(--accent-primary);
+    box-shadow: 0 0 18px rgba(59,130,246,.35); }
+  .match-badge small { display: block; font-family: var(--font-display); font-size: 16px; font-weight: 600;
+    letter-spacing: 4px; color: var(--text-muted); }
+  .match-badge b { display: block; font-family: var(--font-display); font-size: 52px; font-weight: 900;
+    line-height: 1; color: var(--accent-cyan); }
+
+  /* ===== Team cards ===== */
+  .card { position: relative; border-radius: 14px; padding: 10px; overflow: hidden;
+    background: var(--bg-card); border: 1px solid var(--bg-card-border-hover);
+    box-shadow: var(--card-shadow), 0 0 22px rgba(59,130,246,.28); }
+  .card::before, .card::after { content: ""; position: absolute; left: 10%; right: 10%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent); }
+  .card::before { top: 0; } .card::after { bottom: 0; }
+  .card-in { position: relative; display: flex; align-items: center; gap: 22px; padding: 14px 14px 14px 18px;
+    min-height: 196px; border-radius: 10px; background: var(--bg-card-solid); border: 1px solid var(--bg-card-border); overflow: hidden; }
+  .card-in::after { content: ''; position: absolute; right: -20px; bottom: -20px; width: 120px; height: 120px; pointer-events: none;
+    background-size: contain; background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2338bdf8' fill-opacity='0.06'%3E%3Cpath d='M19.07 4.93a10 10 0 0 0-14.14 0 10 10 0 0 0 0 14.14 10 10 0 0 0 14.14 0 10 10 0 0 0 0-14.14zm-4.32 12.02l-1.42 1.42a8.006 8.006 0 0 1-5.65-2.35 8.006 8.006 0 0 1-2.35-5.65l1.42-1.42a6.005 6.005 0 0 0 8 8zm4.32-4.32a8.006 8.006 0 0 1-2.35 5.65l-1.42-1.42a6.005 6.005 0 0 0-8-8l1.42-1.42a8.006 8.006 0 0 1 5.65-2.35 8.006 8.006 0 0 1 4.7 9.54z'/%3E%3C/svg%3E"); }
+
+  .team-logo { position: relative; flex: 0 0 150px; width: 150px; height: 150px; border-radius: 50%;
+    overflow: hidden; background: #0b0f19; border: 4px solid var(--accent-primary);
+    box-shadow: 0 0 0 2px var(--bg-space), 0 0 20px rgba(59,130,246,.45), inset 0 0 12px rgba(0,0,0,.6);
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    font-family: var(--font-display); font-weight: 800; font-size: 22px; line-height: 1.1; }
+  .team-logo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    object-position: center; transform: scale(var(--zoom, 1)); transform-origin: center; display: block; }
+
+  .card-body { flex: 1; min-width: 0; position: relative; z-index: 1; }
+  .top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+  .team-name { font-family: var(--font-display); font-size: 38px; font-weight: 800; letter-spacing: .5px; }
+  .score { font-family: var(--font-display); font-size: 36px; font-weight: 800; text-align: center; }
+  .overs { font-family: var(--font-display); font-size: 24px; font-weight: 600; color: var(--text-muted); white-space: nowrap; }
+  .overs b { color: var(--accent-cyan); font-size: 32px; margin-left: 6px; font-weight: 800; }
+
+  .tables { display: flex; gap: 22px; padding: 8px 12px; border-radius: 8px;
+    background: rgba(30,41,59,.55); border: 1px solid var(--bg-card-border); }
+  .tbl { flex: 1; min-width: 0; }
+  table { border-collapse: collapse; width: 100%; table-layout: fixed; }
+  th { font-family: var(--font-display); font-size: 16px; font-weight: 700; text-align: left; color: var(--text-muted);
+    letter-spacing: .8px; padding: 0 0 4px; border-bottom: 3px solid var(--accent-primary); white-space: nowrap; overflow: hidden; }
+  th.n, td.n { text-align: center; }
+  td { font-size: 16px; font-weight: 600; padding: 4px 4px; height: 30px; color: var(--text-main);
+    border-bottom: 1px solid var(--bg-card-border); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  td.n { color: var(--accent-cyan); font-family: var(--font-display); font-weight: 700; font-size: 17px; }
+  td.note { color: var(--text-subtle); font-style: italic; font-weight: 500; }
+  .w-runs, .w-balls, .w-ov { width: 52px; } .w-fig { width: 66px; }
+  .gap { width: 8px; border-bottom: none !important; padding: 0 !important; }
+
+  .result { height: 66px; display: flex; align-items: center; justify-content: flex-end; padding: 0 20px;
+    background: var(--accent-primary-subtle); border: 1px solid var(--bg-card-border-hover);
+    border-left: 8px solid var(--accent-primary); border-radius: 6px; box-shadow: var(--card-shadow); }
+  .result span { font-family: var(--font-display); font-size: 34px; font-weight: 800; letter-spacing: .5px; color: var(--text-secondary); }
+  .result em { font-style: normal; color: var(--accent-cyan); }
+
+  @media print {
+    body { padding: 0; background: none; }
+    .toolbar { display: none; }
+    .stage { transform: none !important; }
+    @page { margin: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <select id="picker" onchange="setMatch(this.value)"></select>
+  <button onclick="downloadPNG()">Download PNG</button>
+  <button onclick="downloadPDF()">Save as PDF</button>
+</div>
+
+<div class="wrap" id="wrap">
+<div class="stage" id="stage">
+<div class="poster" id="poster">
+  <div class="glow"></div>
+
+  <div class="stadium">
+    <svg viewBox="0 0 400 768" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#1e293b"/><stop offset="1" stop-color="#0f172a"/></linearGradient>
+        <radialGradient id="flood" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0" stop-color="#38bdf8" stop-opacity=".5"/><stop offset="1" stop-color="#38bdf8" stop-opacity="0"/></radialGradient>
+      </defs>
+      <rect width="400" height="768" fill="url(#sky)"/>
+      <circle cx="320" cy="50" r="120" fill="url(#flood)"/>
+      <path d="M-20 150 Q90 110 180 280" stroke="#334155" stroke-width="26" fill="none" opacity=".45"/>
+      <rect x="330" y="70" width="6" height="250" fill="#475569"/>
+      <rect x="300" y="14" width="66" height="60" rx="5" fill="#64748b"/>
+      <g fill="#e2e8f0">
+        <circle cx="312" cy="28" r="4.5"/><circle cx="329" cy="28" r="4.5"/><circle cx="346" cy="28" r="4.5"/><circle cx="359" cy="28" r="4.5"/>
+        <circle cx="312" cy="44" r="4.5"/><circle cx="329" cy="44" r="4.5"/><circle cx="346" cy="44" r="4.5"/><circle cx="359" cy="44" r="4.5"/>
+        <circle cx="312" cy="60" r="4.5"/><circle cx="329" cy="60" r="4.5"/><circle cx="346" cy="60" r="4.5"/><circle cx="359" cy="60" r="4.5"/></g>
+      <polygon points="270,270 400,240 400,330 270,340" fill="#1e293b"/>
+      <polygon points="170,290 270,270 270,340 170,360" fill="#334155"/>
+      <polygon points="0,380 120,340 240,370 240,410 0,420" fill="#475569"/>
+      <rect x="0" y="410" width="400" height="60" fill="#3b4a63"/>
+      <rect x="0" y="470" width="400" height="40" fill="#334155"/>
+      <polygon points="0,510 400,470 400,560 0,590" fill="#3f4e68"/>
+      <path d="M0 600 Q220 580 400 500 L400 768 L0 768Z" fill="#2b3a52"/>
+      <path d="M0 650 Q230 640 400 560" stroke="#3b82f6" stroke-width="2" fill="none" opacity=".5"/>
+    </svg>
+
+    <div class="brand">
+      <img class="brand-logo" id="brandLogo" alt="Tournament logo">
+      <div class="brand-title" id="brandTitle">E-LEGENDS<br>TROPHY 2K26</div>
+      <div class="brand-sub">CRICKET</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="header">
+      <div class="titles">
+        <h1>MATCH SUMMARY</h1>
+        <h2 id="tName"></h2>
+      </div>
+      <div class="match-badge"><small>MATCH</small><b id="matchNo"></b></div>
+    </div>
+    <div class="card" id="card1"></div>
+    <div class="card" id="card2"></div>
+    <div class="result"><span id="result"></span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+/* ============ MATCH DATA (edit / paste new match objects here) ============ */
+const TOURNAMENT = {
+  name: "Prof. A. Thurairajah Memorial Cricket Tournament 2K26",
+  brandTitle: "E-LEGENDS<br>TROPHY 2K26",
+  logo: "images/tournamentLogo.png"      // transparent PNG
+};
+
+const LOGOS = {
+  E22: "images/E22.png",
+  E23: "images/E23.jpg",
+  E24: "images/E24.jpg",
+  E25: "images/E25.jpg"
+};
+
+/* Per-team zoom inside the circle (1 = full artwork, 1.1 = slightly tighter crop) */
+const ZOOM = { E22: 1.0, E23: 1.0, E24: 1.0, E25: 1.0 };
+
+const matches = [
+  {
+    matchNo: 1,
+    result: "E23 WON BY 10 WICKETS",
+    innings: [
+      { team:"E25", score:"140/7", overs:"20",
+        batters:[
+          { name:"Shehan Rangana", runs:"21", balls:"21" },
+          { name:"Kathujan Chandrapavan", runs:"14", balls:"16" },
+          { name:"Riham Ahamed", runs:"13", balls:"17" } ],
+        bowlingTeam:"E23",
+        bowlers:[
+          { name:"Kalindu Geeganage", figures:"2/30", overs:"4" },
+          { name:"Nirod Shanil", figures:"1/26", overs:"4" },
+          { name:"Rochana Muthukumarana", figures:"1/27", overs:"4" },
+          { name:"Dehan Rajanayaka", figures:"1/18", overs:"3" },
+          { name:"Adhithya Randeniya", figures:"1/19", overs:"2" } ] },
+      { team:"E23", score:"144/0", overs:"12",
+        batters:[
+          { name:"Dehan Rajanayaka", runs:"81*", balls:"36" },
+          { name:"Chamindu Gunasinghe", runs:"43*", balls:"38" } ],
+        bowlingTeam:"E25",
+        bowlers:[], bowlersNote:"No wickets taken" }
+    ]
+  },
+  {
+    matchNo: 2,
+    result: "E24 WON BY 4 WICKETS",
+    innings: [
+      { team:"E22", score:"109 ALL OUT", overs:"16.2",
+        batters:[
+          { name:"Ashan Madhusanka", runs:"26", balls:"16" },
+          { name:"Abhishek Tharlas", runs:"21*", balls:"11" },
+          { name:"Mehethuran Kujilan", runs:"14", balls:"17" } ],
+        bowlingTeam:"E24",
+        bowlers:[
+          { name:"Neguleswaran Logudharshan", figures:"5/30", overs:"4" },
+          { name:"Iduwara Manuka", figures:"2/7", overs:"2" },
+          { name:"Kaveesh Shaluka", figures:"1/18", overs:"4" } ] },
+      { team:"E24", score:"110/6", overs:"15.4",
+        batters:[
+          { name:"Aflal Ahamed", runs:"49", balls:"27" },
+          { name:"Chandupa Nipun", runs:"26", balls:"21" },
+          { name:"Dilshan Madhuranga", runs:"11*", balls:"16" },
+          { name:"Kaveesh Shaluka", runs:"10", balls:"12" } ],
+        bowlingTeam:"E22",
+        bowlers:[
+          { name:"Yashikumar", figures:"2/33", overs:"4" },
+          { name:"Ashan Madhusanka", figures:"1/18", overs:"3" } ] }
+    ]
+  },
+  {
+    matchNo: 3,
+    result: "E24 WON BY 47 RUNS",
+    innings: [
+      { team:"E24", score:"209/6", overs:"20",
+        batters:[
+          { name:"Tharusha Bandara", runs:"45*", balls:"35" },
+          { name:"Aflal Ahamed", runs:"37", balls:"15" },
+          { name:"Chandupa Nipun", runs:"33", balls:"22" },
+          { name:"Kaveesh Shaluka", runs:"20", balls:"12" },
+          { name:"Kaveeja Sandeepa", runs:"15*", balls:"15" },
+          { name:"Rumesh Malshan", runs:"13", balls:"14" } ],
+        bowlingTeam:"E25",
+        bowlers:[
+          { name:"Kathujan Chandrapavan", figures:"2/20", overs:"4" },
+          { name:"Ahmed Athnan", figures:"1/25", overs:"3" },
+          { name:"Shehan Rangana", figures:"1/49", overs:"4" } ] },
+      { team:"E25", score:"162/8", overs:"20",
+        batters:[
+          { name:"Nimesh Rathnayake", runs:"40", balls:"26" },
+          { name:"Shehan Rangana", runs:"34", balls:"25" },
+          { name:"Riham Ahamed", runs:"29", balls:"27" },
+          { name:"Iruthayarajah Sherubabel", runs:"14", balls:"12" } ],
+        bowlingTeam:"E24",
+        bowlers:[
+          { name:"Aflal Ahamed", figures:"2/20", overs:"3" },
+          { name:"Ravindu Lakmal", figures:"2/20", overs:"4" },
+          { name:"Neguleswaran Logudharshan", figures:"2/28", overs:"4" },
+          { name:"Chandupa Nipun", figures:"2/34", overs:"4" } ] }
+    ]
+  },
+  {
+    matchNo: 4,
+    result: "E22 WON BY 27 RUNS",
+    innings: [
+      { team:"E22", score:"170/9", overs:"20",
+        batters:[
+          { name:"Gaurawa Mihiranga", runs:"47", balls:"34" },
+          { name:"Abhishek Tharlas", runs:"24", balls:"11" },
+          { name:"Nishan Pramodha", runs:"19*", balls:"10" },
+          { name:"Kavindu Rathnayake", runs:"16", balls:"13" },
+          { name:"Ravindu Pussekumbura", runs:"13", balls:"17" } ],
+        bowlingTeam:"E23",
+        bowlers:[
+          { name:"Tharusha Dilhara", figures:"3/22", overs:"4" },
+          { name:"Jalitha Tharuka", figures:"3/34", overs:"4" },
+          { name:"Dehan Rajanayaka", figures:"1/21", overs:"4" } ] },
+      { team:"E23", score:"143 ALL OUT", overs:"19.2",
+        batters:[
+          { name:"Dehan Rajanayaka", runs:"44", balls:"34" },
+          { name:"Chamindu Gunasinghe", runs:"39", balls:"31" },
+          { name:"Adhithya Randeniya", runs:"21*", balls:"13" },
+          { name:"Justen Robinson", runs:"11", balls:"12" },
+          { name:"Jalitha Tharuka", runs:"10", balls:"8" } ],
+        bowlingTeam:"E22",
+        bowlers:[
+          { name:"Ashan Madhusanka", figures:"3/27", overs:"4" },
+          { name:"Mehethuran Kujilan", figures:"2/33", overs:"6.1" },
+          { name:"Ravindu Pussekumbura", figures:"1/14", overs:"1" } ] }
+    ]
+  }
+];
+/* ========================================================================== */
+
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function inningsCard(t){
+  const bat = t.batters.map(b =>
+    `<tr><td>${esc(b.name)}</td><td class="gap"></td><td class="n">${esc(b.runs)}</td><td class="gap"></td><td class="n">${esc(b.balls)}</td></tr>`).join("");
+  const bowl = t.bowlers.length
+    ? t.bowlers.map(b =>
+        `<tr><td>${esc(b.name)}</td><td class="gap"></td><td class="n">${esc(b.figures)}</td><td class="gap"></td><td class="n">${esc(b.overs)}</td></tr>`).join("")
+    : `<tr><td class="note" colspan="5">${esc(t.bowlersNote || "-")}</td></tr>`;
+  const src = t.logo || LOGOS[t.team];
+  const logo = src ? `<img src="${esc(src)}" alt="${esc(t.team)}" style="--zoom:${ZOOM[t.team] || 1}">` : "TEAM<br>LOGO";
+  return `
+  <div class="card-in">
+    <div class="team-logo">${logo}</div>
+    <div class="card-body">
+      <div class="top">
+        <div class="team-name">${esc(t.team)}</div>
+        <div class="score">${esc(t.score)}</div>
+        <div class="overs">OVERS <b>${esc(t.overs)}</b></div>
+      </div>
+      <div class="tables">
+        <div class="tbl"><table>
+          <tr><th>BATTERS</th><th class="gap"></th><th class="n w-runs">RUNS</th><th class="gap"></th><th class="n w-balls">BALLS</th></tr>${bat}</table></div>
+        <div class="tbl"><table>
+          <tr><th>BOWLERS &ndash; ${esc(t.bowlingTeam)}</th><th class="gap"></th><th class="n w-fig">FIG</th><th class="gap"></th><th class="n w-ov">OVERS</th></tr>${bowl}</table></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+let current = 0;
+function render(){
+  const m = matches[current];
+  document.getElementById("tName").textContent = TOURNAMENT.name;
+  document.getElementById("matchNo").textContent = m.matchNo;
+  document.getElementById("brandLogo").src = TOURNAMENT.logo;
+  document.getElementById("brandTitle").innerHTML = TOURNAMENT.brandTitle;
+  document.getElementById("card1").innerHTML = inningsCard(m.innings[0]);
+  document.getElementById("card2").innerHTML = inningsCard(m.innings[1]);
+  document.getElementById("result").innerHTML = "RESULT: <em>" + esc(m.result) + "</em>";
+  document.title = "Match " + m.matchNo + " Summary - " + TOURNAMENT.name;
+  fit();
+}
+function setMatch(i){ current = +i; render(); }
+
+const picker = document.getElementById("picker");
+matches.forEach((m, i) => picker.add(new Option("Match " + m.matchNo, i)));
+
+function fit(forcePrint){
+  const s = forcePrint ? 1 : Math.min(1, (window.innerWidth - 32) / 1376);
+  const stage = document.getElementById("stage"), wrap = document.getElementById("wrap");
+  const h = document.getElementById("poster").offsetHeight;
+  stage.style.transform = `scale(${s})`;
+  wrap.style.width = 1376 * s + "px";
+  wrap.style.height = h * s + "px";
+}
+window.addEventListener("resize", () => fit());
+window.addEventListener("load", () => fit());
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => fit());
+window.addEventListener("beforeprint", () => fit(true));
+window.addEventListener("afterprint", () => fit());
+
+function downloadPDF(){
+  const h = document.getElementById("poster").offsetHeight;
+  let st = document.getElementById("pageSize");
+  if(!st){ st = document.createElement("style"); st.id = "pageSize"; document.head.appendChild(st); }
+  st.textContent = `@page{size:1376px ${h}px;margin:0}`;
+  window.print();
+}
+
+function downloadPNG(){
+  const go = () => {
+    const stage = document.getElementById("stage"), prev = stage.style.transform;
+    stage.style.transform = "none";
+    html2canvas(document.getElementById("poster"), {scale:2, useCORS:true, backgroundColor:null}).then(c => {
+      stage.style.transform = prev;
+      const a = document.createElement("a");
+      a.download = "match-" + matches[current].matchNo + ".png";
+      a.href = c.toDataURL("image/png"); a.click();
+    });
+  };
+  if (window.html2canvas) return go();
+  const s = document.createElement("script");
+  s.src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js";
+  s.onload = go; document.head.appendChild(s);
+}
+
+render();
+</script>
+</body>
+</html>
