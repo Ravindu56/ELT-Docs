@@ -360,7 +360,7 @@ const matches = [
           { name:"Tharusha Dilhara", figures:"3/23", overs:"4" },
           { name:"Dehan Rajanayaka", figures:"2/29", overs:"4" },
           { name:"Adhithya Randeniya", figures:"1/7", overs:"3" } ] },
-      { team:"E23", score:"135/3", overs:"13.4",
+      { team:"E23", score:"135/3", overs:"13.4", toss:"Toss - Bowl",
         batters:[
           { name:"Dehan Rajanayaka", runs:"70*", balls:"43" },
           { name:"Kalindu Geeganage", runs:"29", balls:"15" },
@@ -390,7 +390,7 @@ const matches = [
           { name:"Isira Perera", figures:"1/19", overs:"2" },
           { name:"Ahmed Athnan", figures:"1/39", overs:"4" },
           { name:"Sathsara Sri", figures:"1/16", overs:"3" } ] },
-      { team:"E25", score:"102/9", overs:"20",
+      { team:"E25", score:"102/9", overs:"20", toss:"Toss - Bowl",
         batters:[
           { name:"Farith Amith", runs:"27", balls:"44" },
           { name:"Iruthayarajah Sherubabel", runs:"16", balls:"20" },
@@ -423,7 +423,7 @@ function inningsCard(t){
     <div class="team-logo">${logo}</div>
     <div class="card-body">
       <div class="top">
-        <div class="team-name">${esc(t.team)}</div>
+        <div class="team-name">${esc(t.team)}${t.toss ? `<span class="toss-info">(${esc(t.toss)})</span>` : ""}</div>
         <div class="score">${esc(t.score)}</div>
         <div class="overs">OVERS <b>${esc(t.overs)}</b></div>
       </div>
