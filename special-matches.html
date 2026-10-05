@@ -89,11 +89,13 @@ const LOGOS = {
   E22: "images/E22.png",
   E23: "images/E23.jpg",
   E24: "images/E24.jpg",
-  E25: "images/E25.jpg"
+  E25: "images/E25.jpg",
+  ALUMNI: "images/Alumini.jpg",          // Legends (Alumni)
+  PRESENT: "images/Rising.png"           // Rising XI (Present)
 };
 
 /* Per-team zoom inside the circle (1 = full artwork, 1.1 = slightly tighter crop) */
-const ZOOM = { E22: 1.0, E23: 1.0, E24: 1.0, E25: 1.0 };
+const ZOOM = { E22: 1.0, E23: 1.0, E24: 1.0, E25: 1.0, ALUMNI: 1.0, PRESENT: 1.0 };
 
 const matches = [{"matchNo":"FINAL","kind":"final","label":"Final - E22 vs E23","title":"Final - E22 vs E23","filename":"final-e22-vs-e23","result":"E22 WON BY 9 RUNS","innings":[{"team":"E22","score":"162/9","overs":"20","batters":[{"name":"Kavindu Rathnayake","runs":"34","balls":"30"},{"name":"Nishan Pramodha","runs":"18","balls":"16"},{"name":"Abhishek Tharlas","runs":"17","balls":"12"},{"name":"Yashikumar","runs":"16","balls":"10"},{"name":"Ravindu Pussekumbura","runs":"16","balls":"23"},{"name":"Chirath Amuyaru","runs":"15*","balls":"6"},{"name":"Ashan Madhushanka","runs":"11","balls":"6"}],"bowlingTeam":"E23","bowlers":[{"name":"Dehan Rajanayaka","figures":"5/16","overs":"4"},{"name":"Jalitha Tharuka","figures":"1/29","overs":"4"},{"name":"Tharusha Dilhara","figures":"1/42","overs":"3"},{"name":"Adhithya Randeniya","figures":"1/32","overs":"4"}]},{"team":"E23","toss":"Toss - Bowl","score":"153/9","overs":"20","batters":[{"name":"Dehan Rajanayaka","runs":"59","balls":"40"},{"name":"Adhithya Randeniya","runs":"17","balls":"12"},{"name":"Janithra Chandima","runs":"15*","balls":"6"},{"name":"Jalitha Tharuka","runs":"14","balls":"8"},{"name":"Rochana Muthukumarana","runs":"13","balls":"13"}],"bowlingTeam":"E22","bowlers":[{"name":"Nishan Pramodha","figures":"3/28","overs":"4"},{"name":"Abhishek Tharlas","figures":"3/31","overs":"4"},{"name":"Mehethuran Kujilan","figures":"2/39","overs":"5.1"},{"name":"Yashikumar","figures":"1/30","overs":"4"}]}]},{"matchNo":"SPECIAL","kind":"special","label":"Special - Legends vs Rising XI","title":"Special Match - Legends vs Rising XI","filename":"special-legends-vs-rising-xi","result":"RISING XI WON BY 8 WICKETS","innings":[{"team":"ALUMNI","toss":"Toss - Bat","displayName":"LEGENDS","subtitle":"Alumni","score":"116/5","overs":"20","batters":[{"name":"Krishantha Supun","runs":"47","balls":"40"},{"name":"Thisaru Rathnayaka","runs":"21","balls":"23"},{"name":"Mahesh Sanjula","runs":"17","balls":"26"},{"name":"Charith Nuwantha","runs":"11*","balls":"11"},{"name":"Kasun Prabhash","runs":"9*","balls":"11"}],"bowlingTeam":"RISING XI","bowlers":[{"name":"Kalindu Geeganage","figures":"2/18","overs":"4"},{"name":"Nishan Pramodha","figures":"1/9","overs":"2"},{"name":"Chandupa Nipun","figures":"1/14","overs":"3"},{"name":"Aflal Ahamed","figures":"1/10","overs":"2"}]},{"team":"PRESENT","displayName":"RISING XI","subtitle":"Present","score":"119/2","overs":"11.5","batters":[{"name":"Gaurawa Mihiranga","runs":"55*","balls":"41"},{"name":"Chamindu Gunasinghe","runs":"28","balls":"17"},{"name":"Kaveesh Shaluka","runs":"10","balls":"12"},{"name":"Aflal Ahamed","runs":"6*","balls":"2"}],"bowlingTeam":"LEGENDS","bowlers":[{"name":"Deshan Fernando","figures":"1/27","overs":"3"},{"name":"Mahesh Sanjula","figures":"1/7","overs":"0.5"}]}]}];
 /* ========================================================================== */
@@ -107,14 +109,15 @@ function inningsCard(t){
     ? t.bowlers.map(b =>
         `<tr><td>${esc(b.name)}</td><td class="gap"></td><td class="n">${esc(b.figures)}</td><td class="gap"></td><td class="n">${esc(b.overs)}</td></tr>`).join("")
     : `<tr><td class="note" colspan="5">${esc(t.bowlersNote || "-")}</td></tr>`;
+  const label = t.displayName || t.team;
   const src = t.logo || LOGOS[t.team];
-  const logo = src ? `<img src="${esc(src)}" alt="${esc(t.team)}" style="--zoom:${ZOOM[t.team] || 1}">` : esc(t.displayName || t.team);
+  const logo = src ? `<img src="${esc(src)}" alt="${esc(label)}" style="--zoom:${ZOOM[t.team] || 1}" onerror="this.parentNode.textContent=this.alt">` : esc(label);
   return `
   <div class="card-in">
     <div class="team-logo">${logo}</div>
     <div class="card-body">
       <div class="top">
-        <div class="team-name">${esc(t.displayName || t.team)}${t.toss ? `<span class="toss-info">(${esc(t.toss)})</span>` : ""}${t.subtitle ? `<span class="team-subtitle">${esc(t.subtitle)}</span>` : ""}</div>
+        <div class="team-name">${esc(label)}${t.toss ? `<span class="toss-info">(${esc(t.toss)})</span>` : ""}${t.subtitle ? `<span class="team-subtitle">${esc(t.subtitle)}</span>` : ""}</div>
         <div class="score">${esc(t.score)}</div>
         <div class="overs">OVERS <b>${esc(t.overs)}</b></div>
       </div>
