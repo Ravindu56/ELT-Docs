@@ -1,0 +1,11 @@
+#post.team{gap:18px}
+.team .brand .logo{width:100px;height:100px}
+.team .brand .year{font-size:36px;margin-top:2px}
+.team .brand .sub{font-size:20px}
+.team .badge{font-size:40px;padding:12px 40px}
+.tphoto{position:relative;width:900px;height:540px;margin-bottom:120px;border:6px solid var(--a);border-radius:20px;background:rgba(255,255,255,.06);box-shadow:0 0 70px color-mix(in srgb,var(--a) 55%,transparent);display:flex;align-items:center;justify-content:center}
+.tphoto .ph{font-family:'Orbitron',sans-serif;font-size:34px;letter-spacing:4px;color:rgba(255,255,255,.35)}
+.tphoto .pic{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:14px}
+.tlogo{position:absolute;left:-40px;top:-40px;width:170px;height:170px;border-radius:50%;background:#fff;border:6px solid var(--a);overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.55)}
+.tlogo .lg{width:100%;height:100%;object-fit:contain;padding:12px}
+.ttrophy{position:absolute;left:50%;bottom:-110px;transform:translateX(-50%);height:300px;width:auto;filter:drop-shadow(0 10px 22px rgba(0,0,0,.7))}
