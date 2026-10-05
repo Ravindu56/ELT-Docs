@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap');
+:root{--a:#38bdf8;--bg1:#050d22;--bg2:#0b2a5b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#020617;font-family:'Rajdhani',sans-serif;color:#f8fafc;display:flex;flex-direction:column;align-items:center;padding:16px;gap:14px}
+.theme-gold{--a:#fbbf24;--bg2:#4a3506}
+.theme-cyan{--a:#38bdf8;--bg2:#0b2a5b}
+.theme-red{--a:#fb7185;--bg2:#4c0f1f}
+.theme-silver{--a:#cbd5e1;--bg2:#283347}
+#post{width:1080px;height:1350px;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:44px 60px;border:8px solid var(--a);background:radial-gradient(circle at 50% 35%,var(--bg2),var(--bg1) 72%);box-shadow:0 0 60px color-mix(in srgb,var(--a) 45%,transparent) inset}
+.brand{text-align:center}
+.brand .logo{width:150px;height:150px;object-fit:contain;display:block;margin:0 auto}
+.brand .year{font-family:'Orbitron',sans-serif;font-weight:800;font-size:44px;letter-spacing:8px;padding-left:8px;line-height:1.1;margin-top:6px}
+.brand .sub{font-weight:600;font-size:22px;letter-spacing:5px;color:var(--a);margin-top:4px}
+.badge{font-family:'Orbitron',sans-serif;font-weight:800;font-size:44px;letter-spacing:4px;text-align:center;padding:16px 44px;border-radius:14px;color:#0b1220;background:linear-gradient(90deg,var(--a),#fff 50%,var(--a))}
+.hero{position:relative;width:480px;height:480px;border-radius:50%;border:8px solid var(--a);background:rgba(255,255,255,.06);box-shadow:0 0 70px color-mix(in srgb,var(--a) 60%,transparent);display:flex;align-items:center;justify-content:center}
+.hero .ph{font-family:'Orbitron',sans-serif;font-size:30px;letter-spacing:3px;color:rgba(255,255,255,.35);text-align:center;padding:0 40px}
+.hero .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%}
+.hero.team .photo{object-fit:contain;padding:48px;background:#fff}
+.hero .trophy{position:absolute;right:-70px;bottom:-30px;width:210px;height:auto;filter:drop-shadow(0 8px 18px rgba(0,0,0,.6))}
+.name{font-family:'Orbitron',sans-serif;font-weight:800;font-size:60px;text-align:center;line-height:1.1;text-shadow:0 3px 10px rgba(0,0,0,.6)}
+.teamchip{display:flex;align-items:center;gap:14px;font-weight:700;font-size:34px;letter-spacing:3px;color:var(--a)}
+.teamchip .tl{width:56px;height:56px;border-radius:50%;object-fit:cover;background:#fff}
+.stats{display:flex;gap:22px;justify-content:center}
+.stat{min-width:210px;text-align:center;padding:16px 20px;border-radius:16px;border:2px solid var(--a);background:rgba(255,255,255,.07)}
+.stat b{display:block;font-family:'Orbitron',sans-serif;font-size:52px;color:var(--a);line-height:1.1}
+.stat i{display:block;font-style:normal;font-weight:700;font-size:24px;letter-spacing:3px;margin-top:4px}
+.note{font-weight:700;font-size:30px;letter-spacing:4px;text-align:center;color:#e2e8f0}
+.foot{font-weight:600;font-size:22px;letter-spacing:6px;color:var(--a)}
+.bar button{font:700 18px 'Rajdhani',sans-serif;padding:10px 26px;border:0;border-radius:8px;background:#38bdf8;color:#04121f;cursor:pointer}
