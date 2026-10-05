@@ -25,6 +25,19 @@ function toData(url){
     return new Promise(function(res,rej){var f=new FileReader();f.onload=function(){res(f.result)};f.onerror=rej;f.readAsDataURL(b)});
   });
 }
+function rasterize(src,w,h){
+  return new Promise(function(res,rej){
+    var i=new Image();
+    i.onload=function(){
+      var c=document.createElement('canvas');
+      c.width=w;c.height=h;
+      c.getContext('2d').drawImage(i,0,0,w,h);
+      try{res(c.toDataURL('image/png'))}catch(e){rej(e)}
+    };
+    i.onerror=rej;
+    i.src=src;
+  });
+}
 function loadSrc(im,src){
   return new Promise(function(res){im.onload=im.onerror=function(){res()};im.src=src});
 }
@@ -55,9 +68,14 @@ function prepare(p,st){
   });
   var grad='radial-gradient(circle at 50% 35%,var(--bg2),var(--bg1) 72%)';
   var m=/url\(["']?([^"')]+)["']?\)/.exec(getComputedStyle(p).backgroundImage||'');
-  st.undo.push(function(){p.style.backgroundImage=''});
+  st.undo.push(function(){p.style.backgroundImage='';p.style.backgroundSize='';p.style.backgroundRepeat='';p.style.backgroundPosition=''});
   if(m&&m[1].indexOf('data:')!==0){
-    tasks.push(toData(m[1]).then(function(d){p.style.backgroundImage='url("'+d+'"),'+grad}).catch(function(){st.partial=true;p.style.backgroundImage=grad}));
+    tasks.push(toData(m[1]).then(function(d){return rasterize(d,1080,1350)}).then(function(png){
+      p.style.backgroundImage='url("'+png+'"),'+grad;
+      p.style.backgroundSize='1080px 1350px, 100% 100%';
+      p.style.backgroundRepeat='no-repeat, no-repeat';
+      p.style.backgroundPosition='0 0, 0 0';
+    }).catch(function(){st.partial=true;p.style.backgroundImage=grad}));
   }
   return Promise.all(tasks);
 }
