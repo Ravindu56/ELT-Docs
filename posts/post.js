@@ -28,12 +28,27 @@ function toData(url){
 function loadSrc(im,src){
   return new Promise(function(res){im.onload=im.onerror=function(){res()};im.src=src});
 }
+function swapFit(im,st){
+  var cs=getComputedStyle(im),of=cs.objectFit;
+  if(of!=='cover'&&of!=='contain')return;
+  var d=document.createElement('div');
+  d.className=im.className;
+  d.style.display=cs.display==='inline'?'block':cs.display;
+  d.style.backgroundImage='url("'+im.src+'")';
+  d.style.backgroundSize=of;
+  d.style.backgroundPosition='center';
+  d.style.backgroundRepeat='no-repeat';
+  d.style.backgroundOrigin='content-box';
+  im.parentNode.insertBefore(d,im);
+  im.style.display='none';
+  st.undo.push(function(){d.remove();im.style.display=''});
+}
 function prepare(p,st){
   var tasks=[];
   [].forEach.call(p.querySelectorAll('img'),function(im){
     var orig=im.getAttribute('src');
     st.undo.push(function(){im.style.visibility='';im.setAttribute('src',orig)});
-    tasks.push(toData(im.currentSrc||im.src).then(function(d){return loadSrc(im,d)}).catch(function(){st.partial=true;im.style.visibility='hidden'}));
+    tasks.push(toData(im.currentSrc||im.src).then(function(d){return loadSrc(im,d)}).then(function(){swapFit(im,st)}).catch(function(){st.partial=true;im.style.visibility='hidden'}));
   });
   [].forEach.call(p.querySelectorAll('canvas'),function(cv){
     try{cv.toDataURL()}catch(e){st.partial=true;cv.style.visibility='hidden';st.undo.push(function(){cv.style.visibility=''})}
