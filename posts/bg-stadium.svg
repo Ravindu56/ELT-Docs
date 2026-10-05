@@ -1,0 +1,31 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 1350' preserveAspectRatio='xMidYMid slice'>
+<defs>
+<linearGradient id='beam' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#ffffff' stop-opacity='.26'/><stop offset='1' stop-color='#ffffff' stop-opacity='0'/></linearGradient>
+<radialGradient id='glow'><stop offset='0' stop-color='#ffffff' stop-opacity='.85'/><stop offset='1' stop-color='#ffffff' stop-opacity='0'/></radialGradient>
+<radialGradient id='field' cx='.5' cy='.5' r='.5'><stop offset='0' stop-color='#22c55e' stop-opacity='.34'/><stop offset='1' stop-color='#15803d' stop-opacity='.06'/></radialGradient>
+</defs>
+<polygon points='95,130 125,130 780,1060 -140,1060' fill='url(#beam)'/>
+<polygon points='955,130 985,130 1220,1060 300,1060' fill='url(#beam)'/>
+<circle cx='110' cy='118' r='95' fill='url(#glow)'/>
+<circle cx='970' cy='118' r='95' fill='url(#glow)'/>
+<rect x='68' y='92' width='84' height='48' rx='6' fill='#ffffff' fill-opacity='.22'/>
+<rect x='928' y='92' width='84' height='48' rx='6' fill='#ffffff' fill-opacity='.22'/>
+<rect x='106' y='140' width='8' height='300' fill='#ffffff' fill-opacity='.12'/>
+<rect x='966' y='140' width='8' height='300' fill='#ffffff' fill-opacity='.12'/>
+<g fill='none' stroke='#ffffff'>
+<ellipse cx='540' cy='1190' rx='900' ry='330' stroke-opacity='.10' stroke-width='3'/>
+<ellipse cx='540' cy='1190' rx='840' ry='300' stroke-opacity='.22' stroke-width='16' stroke-dasharray='2 9'/>
+<ellipse cx='540' cy='1200' rx='770' ry='268' stroke-opacity='.20' stroke-width='16' stroke-dasharray='2 9'/>
+<ellipse cx='540' cy='1210' rx='700' ry='236' stroke-opacity='.18' stroke-width='16' stroke-dasharray='2 9'/>
+<ellipse cx='540' cy='1220' rx='630' ry='204' stroke-opacity='.16' stroke-width='14' stroke-dasharray='2 9'/>
+</g>
+<ellipse cx='540' cy='1235' rx='560' ry='170' fill='url(#field)'/>
+<ellipse cx='540' cy='1235' rx='560' ry='170' fill='none' stroke='#ffffff' stroke-opacity='.35' stroke-width='3' stroke-dasharray='14 10'/>
+<polygon points='500,1130 580,1130 626,1340 454,1340' fill='#e7cf94' fill-opacity='.20'/>
+<g stroke='#ffffff' stroke-opacity='.4' stroke-width='3'><line x1='488' y1='1180' x2='592' y2='1180'/><line x1='466' y1='1300' x2='614' y2='1300'/></g>
+<g fill='none' stroke='#ffffff' stroke-opacity='.07' stroke-width='4'>
+<circle cx='540' cy='640' r='400'/>
+<path d='M300 380 C 420 520 420 760 300 900'/>
+<path d='M780 380 C 660 520 660 760 780 900'/>
+</g>
+</svg>
