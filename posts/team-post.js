@@ -1,3 +1,10 @@
+function fallbackTrophy(src,host){
+  var t=document.createElement('img');
+  t.className='ttrophy';t.src=src;t.alt='';
+  t.style.filter='drop-shadow(0 0 22px rgba(251,191,36,.95)) drop-shadow(0 0 48px rgba(251,191,36,.6))';
+  t.onerror=function(){t.remove()};
+  host.appendChild(t);
+}
 function glowTrophy(src,host){
   var im=new Image();
   im.onload=function(){
@@ -13,8 +20,9 @@ function glowTrophy(src,host){
     x.drawImage(im,pad,pad,w,h);
     x.shadowBlur=0;
     x.drawImage(im,pad,pad,w,h);
-    host.appendChild(c);
+    try{c.toDataURL();host.appendChild(c);}catch(e){fallbackTrophy(src,host);}
   };
+  im.onerror=function(){};
   im.src=src;
 }
 function renderTeamPost(C){
